@@ -1,6 +1,56 @@
 .search-form {
-  * {
-    color: #ffffff;
+  width: 50%;
+  margin: 0 auto;
+  &__inner {
+    width: 80%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    background: #fff;
+    overflow: hidden;
   }
-  
+  &__input {
+    border: none;
+    margin: 0;
+    padding: 5px;
+
+    flex-basis: 96%;
+  }
+  &__btn {
+    border: none;
+    padding: 0;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url(../../images/icons8-search.svg) no-repeat center/cover;
+    cursor: pointer;
+  }
+  &__categories-wrapper {
+    display: inline-block;
+    width: 50%;
+    margin: 0 0 20px 0;
+  }
+  &__categories-label {
+    width: 40%;
+    margin-right: 5px;
+    color: #fff;
+  }
+  &__categories {
+    width: 65%;
+    color: rgb(139, 138, 138);
+  }
+  &__filter-wrapper {
+    display: inline-block;
+    width: 50%;
+  }
+  &__filter-label {
+    width: 40%;
+    margin-right: 5px;
+    color: #fff;
+  }
+  &__filter {
+    width: 65%;
+    color: rgb(139, 138, 138);
+  }
 }
