@@ -1,0 +1,11 @@
+@import './vendor/normalize.css';
+
+@import './components/App/App.scss';
+@import './components/BookCard/BookCard.scss';
+@import './components/BookList/BookList.scss';
+@import './components/BookPage/BookPage.scss';
+@import './components/SearchForm/SearchForm.scss';
+
+* {
+  font-family: sans-serif;
+}
