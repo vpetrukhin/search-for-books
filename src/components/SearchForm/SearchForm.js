@@ -13,31 +13,38 @@ const SearchForm = () => {
   }
   
   return (
-    <form className="search-form" onSubmit={submitHandler}>
-      <div className="search-form__inner">
-        <input type="text" className="search-form__input"/>
-        <button type="submit" className="search-form__btn" />
+    <form className="container-sm w-50" onSubmit={submitHandler}>
+      <input type="text" className="form-control"/>
+
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <label htmlFor="categories" className="text-white fs-5">Categories</label>
+            <select className="form-select" id="categories">
+              <option selected>All</option>
+              <option value="art">Art</option>
+              <option value="biography">Biography</option>
+              <option value="computers">Computers</option>
+              <option value="history">History</option>
+              <option value="medical">Medical</option>
+              <option value="Poetry">Poetry</option>
+            </select>
+          </div>
+          <div className="col">
+            <label htmlFor="filter" className="text-white fs-5">Sorting by</label>
+            <select className="form-select mb-3" id="filter">
+              <option selected>relevance</option>
+              <option value="newest">newest</option>
+            </select>
+          </div>
+        </div>
       </div>
-      <div className="search-form__categories-wrapper">
-        <label htmlFor="categories" className="search-form__categories-label">Categories</label>
-        <select name="categories" id="categories" className="search-form__categories" onChange={selectHandler}>
-          <option value="all" className="search-form__category" selected>all</option>
-          <option value="art" className="search-form__category">art</option>
-          <option value="biogrphy" className="search-form__category">biogrphy</option>
-          <option value="computers" className="search-form__category">computers</option>
-          <option value="history" className="search-form__category">history</option>
-          <option value="medical" className="search-form__category">medical</option>
-          <option value="poetry" className="search-form__category">poetry</option>
-        </select>
-      </div>
-      <div className="search-form__filter-wrapper">
-        <label htmlFor="filter" className="search-form__filter-label">Sorting by</label>
-        <select name="filter" id="filter" className="search-form__filter" defaultValue="relevanse">
-          <option value="relevanse" className="search-form__filter-option" selected>relevance</option>
-          <option value="newest" className="search-form__filter-option">newest</option>
-        </select>
+      <div className="d-grid gap-2">
+        <button type="submit" className="btn btn-light">Search</button>
       </div>
 
+
+      
     </form>
   )
 }
