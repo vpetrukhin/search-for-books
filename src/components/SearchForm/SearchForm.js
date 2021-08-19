@@ -1,27 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
-const SearchForm = () => {
+import { changeForm } from '../../redux/actions';
+
+const SearchForm = ({
+    // formState,
+    // changeInput,
+    // changeCategory,
+    // changeSort,
+    changeForm,
+  }) => {
+
+  const [formValues, setFormValues] = useState({
+    input: '',
+    category: 'all',
+    sort: 'relevance',
+  })
+
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    console.log('submit');
+    changeForm(formValues);
+    setFormValues({
+      ...formValues,
+      input: ''
+    })
   }
 
-  const selectHandler = (e) => {
-    console.log(e.target.value);
+  const changeHandler = (e) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    })
   }
-  
+
   return (
     <form className="container-sm w-50" onSubmit={submitHandler}>
-      <input type="text" className="form-control"/>
-
+      <input
+        type="text"
+        className="form-control"
+        name="input"
+        value={formValues.input}
+        onChange={changeHandler}
+      />
       <div className="container">
         <div className="row">
           <div className="col">
-            <label htmlFor="categories" className="text-white fs-5">Categories</label>
-            <select className="form-select" id="categories">
-              <option selected>All</option>
+            <label htmlFor="categories" className="text-white fs-5">
+              Categories
+            </label>
+            <select
+              className="form-select"
+              id="categories"
+              name="category"
+              onChange={changeHandler}
+            >
+              <option selected>Select a category</option>
+              <option value='all' >All</option>
               <option value="art">Art</option>
               <option value="biography">Biography</option>
               <option value="computers">Computers</option>
@@ -32,20 +67,27 @@ const SearchForm = () => {
           </div>
           <div className="col">
             <label htmlFor="filter" className="text-white fs-5">Sorting by</label>
-            <select className="form-select mb-3" id="filter">
-              <option selected>relevance</option>
+            <select
+              className = "form-select mb-3"
+              id="filter"
+              name="sort"
+              onChange={changeHandler}
+            >
+              <option selected>Select sorting</option>
+              <option value="relevance">relevance</option>
               <option value="newest">newest</option>
             </select>
           </div>
         </div>
       </div>
       <div className="d-grid gap-2">
-        <button type="submit" className="btn btn-light">Search</button>
+        <button type="submit" className="btn btn-light">
+          Search
+        </button>
       </div>
-
-
-      
     </form>
-  )
+  );
 }
-export default SearchForm;
+
+
+export default connect(null, { changeForm })(SearchForm);
