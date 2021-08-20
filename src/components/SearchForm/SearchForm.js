@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { changeForm } from '../../redux/actions';
+import { changeForm, fetchBooks } from '../../redux/actions';
 
 const SearchForm = ({
-    // formState,
-    // changeInput,
-    // changeCategory,
-    // changeSort,
     changeForm,
+    fetchBooks,
   }) => {
+
+  const [alertState, setAlertState] = useState(false)
 
   const [formValues, setFormValues] = useState({
     input: '',
@@ -20,14 +19,21 @@ const SearchForm = ({
 
   const submitHandler = (e) => {
     e.preventDefault();
-    changeForm(formValues);
-    setFormValues({
-      ...formValues,
-      input: ''
-    })
+    if (!formValues.input) {
+      setAlertState(true);
+    } else {
+      changeForm(formValues);
+      fetchBooks(formValues);
+      setFormValues({
+        ...formValues,
+        input: ''
+      })
+    }
+    
   }
 
   const changeHandler = (e) => {
+    setAlertState(false);
     setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
@@ -35,7 +41,7 @@ const SearchForm = ({
   }
 
   return (
-    <form className="container-sm w-50" onSubmit={submitHandler}>
+    <form className="container-sm w-100" onSubmit={submitHandler}>
       <input
         type="text"
         className="form-control"
@@ -43,6 +49,11 @@ const SearchForm = ({
         value={formValues.input}
         onChange={changeHandler}
       />
+      {alertState && 
+        <div className="invalid-feedback">
+          Please enter a keyword.
+        </div>
+      }
       <div className="container">
         <div className="row">
           <div className="col">
@@ -64,8 +75,6 @@ const SearchForm = ({
               <option value="medical">Medical</option>
               <option value="Poetry">Poetry</option>
             </select>
-          </div>
-          <div className="col">
             <label htmlFor="filter" className="text-white fs-5">Sorting by</label>
             <select
               className = "form-select mb-3"
@@ -90,4 +99,7 @@ const SearchForm = ({
 }
 
 
-export default connect(null, { changeForm })(SearchForm);
+export default connect(null, {
+  changeForm,
+  fetchBooks
+})(SearchForm);

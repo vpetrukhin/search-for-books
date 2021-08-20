@@ -1,22 +1,24 @@
 import React from 'react';
 
-const BookCard = () => {
+const BookCard = ({
+    book,
+    bookPageHandler
+  }) => {
+  const { smallImage, categories, title, authors } = book;
 
   const openBookPage = () => {
-    console.log('open');
+    bookPageHandler(book.id);
   }
   
   return (
-    <div className="card bg-light bg-gradient" style={{width: "250px"}} onClick={openBookPage}>
-      <img src="..." className="card-img-top" alt="..." />
-      <div className="card-body">
-        <h6 className="card-subtitle mb-2 text-muted">ctegory</h6>
-        <h5 className="card-title">title</h5>
-        <p className="card-text">
-          author
-        </p>
+    <li className="books__item book bg-light p-2" onClick={openBookPage}>
+      <img src={smallImage} className="book__img mb-3" alt={title} />
+      <div className="book__body">
+        <p className="book__category">{categories}</p>
+        <h5 className="book__title">{title}</h5>
+        <p className="book__author">{authors}</p>
       </div>
-    </div>
+    </li>
   );
 }
 export default BookCard;

@@ -1,21 +1,30 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { disactiveBookPage } from '../../redux/actions';
 
-const BookPage = () => {
+const BookPage = ({ book }) => {
+  const dispatch = useDispatch();
   
+  const { bigImage, categories, title, authors, description } = book;
+
+  const bookPageDisactive = () => {
+    dispatch(disactiveBookPage());
+  }
+
   return (
-    <section className="book-page">
+    <section className="book-page mt-2">
       <div className="container">
         <div className="row">
-          <div className="col w-50">
-            <img src="#" alt="book" className="book-page__img"/>
-          </div>
-          <div className="col w-50 p-5">
-            <p className="text-secondary fs-6">category</p>
-            <h2 className="fs-2">title</h2>
-            <p className="text-secondary fs-6">author</p>
-            <p className="fs-5">description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa dolore ducimus saepe ipsam reiciendis adipisci placeat, nulla, perspiciatis quia consectetur est temporibus accusamus dolorum error ipsum iste. Repellat, cum rem?</p>
+          <div className="col">
+            <img src={bigImage} alt={title} className="book-page__img"/>
+            <p className="text-secondary fs-6">{categories}</p>
+            <h2 className="fs-2">{title}</h2>
+            <p className="text-secondary fs-6">{authors}</p>
+            <p className="book-page__description fs-5">{description}</p>
+            <button type="button" className="btn mt-2 btn-secondary" onClick={bookPageDisactive}>К списку книг</button>
           </div>
         </div>
+        
       </div>
     </section>
   )
